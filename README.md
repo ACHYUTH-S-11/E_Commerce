@@ -1,222 +1,182 @@
-# E-Commerce
-
-This is a Java-based web application of an e-commerce website; customers can browse items, manage carts and orders, and update delivery information; admin can manage products/orders.
-
-## Technologies
-
-**Front-end**: React.js, HTML, CSS
-
-**Back-end**: Java, SpringBoot, JPA(Hibernate), MySQL
-
-## Features
-
-### Users
-- Sign up for a new user account.
-- Change user information (e.g., delivery address/email).
-- Search items by name and category; browse items and their detail page.
-- Add items to Cart; Submit Order by selecting items on Cart.
-- Manage orders: keep track of orders' details, including delivery status, and take action on orders.
-
-### Admin
-- Register for a new user account.
-- Manage goods, including creating a new item, revising an existing item, or deleting an item.
-- Manage orders, including tracking order status and taking delivery actions.
-
-## Team Members
-
-| Role                   | Name        |
-|------------------------|-------------|
-| Product Owner/Developer | Amritanshu  |
-| Scrum Master/Developer  | Achyuth     |
-| Developer               | Santhoshram |
-| Developer               | Kamal Yadav |
-
-
-# Sprint Plan
-
-## Sprint 1: Project Setup and Initial Development
-
-- **Duration**: 1 week
-- **Goals**:
-  - Set up project repositories and environments.
-  - Initialize frontend and backend frameworks.
-  - Implement user registration and login functionality.
-    
-- **Key Tasks**:
-  - Set up React and Spring Boot projects.
-  - Configure database connections.
-  - Develop user authentication module.
-  - Create initial wireframes for user interface.
-
-## Sprint 2: Product Management Module
-
-- **Duration**: 1 week
-- **Goals**:
-  - Develop product management features.
-  - Implement CRUD operations for products.
-  - Create product listing and detail pages.
-    
-- **Key Tasks**:
-  - Design product entity and database schema.
-  - Develop product creation, update, and delete functionalities.
-  - Implement product listing and detail views in frontend.
-  - Validate and store product data in backend.
-
-## Sprint 3: Shopping Cart and Order Management Modules
-
-- **Duration**: 1 week
-- **Goals**:
-  - Implement shopping cart functionalities.
-  - Develop order processing and tracking features.
-  - Implement payment processing.
-    
-- **Key Tasks**:
-  - Design cart item and order entities and database schema.
-  - Develop add/remove item functionalities for the cart.
-  - Create shopping cart page in frontend.
-  - Develop order placement and tracking functionalities.
-  - Integrate payment gateway.
-  - Create order confirmation and tracking pages in frontend.
-
-## Sprint 4: Admin Dashboard Module
-
-- **Duration**: 1 week
-- **Goals**:
-  - Implement admin dashboard functionalities.
-  - Allow admins to manage products, orders, and users.
-    
-- **Key Tasks**:
-  - Design admin entity and database schema.
-  - Develop admin management features.
-  - Create admin dashboard interface.
-  - Generate sales analytics and reports.
-
-## Sprint 5: Testing, Deployment, and Final Review
-
-- **Duration**: 1 week
-- **Goals**:
-  - Perform comprehensive testing.
-  - Deploy the application locally.
-  - Finalize the application and launch the platform.
-    
-- **Key Tasks**:
-  - Conduct unit, integration, and end-to-end testing.
-  - Fix bugs and optimize performance.
-  - Deploy frontend and backend locally.
-  - Prepare deployment documentation.
-  - Review and finalize all features.
-  - Conduct final testing.
-  - Launch the application.
-  - Monitor and gather user feedback.
-
-## Entities
-
-### Admin Entity
-| Field       | Type    | Description                  |
-|-------------|---------|------------------------------|
-| AdminID     | string  | Unique admin identifier      |
-| Name        | string  | Admin name                   |
-| Role        | string  | Role (e.g., superadmin)      |
-| Permissions | array   | List of allowed actions      |
-
-### User Entity
-
-| Field           | Type    | Description                     |
-|-----------------|---------|---------------------------------|
-| UserID          | string  | Unique user identifier          |
-| Name            | string  | Full name                       |
-| Email           | string  | Email address                   |
-| Password        | string  | Hashed password                 |
-| ShippingAddress | string  | Default shipping address        |
-| PaymentDetails  | string  | Stored payment method info      |
-
-### Product Entity
-
-| Field       | Type    | Description              |
-|-------------|---------|--------------------------|
-| ProductID   | string  | Unique identifier        |
-| Name        | string  | Product name             |
-| Description | string  | Product description      |
-| Price       | number  | Product price            |
-| Category    | string  | Product category         |
-| ImageURL    | string  | URL to product image     |
-
-### Order Entity
-
-| Field           | Type    | Description                        |
-|-----------------|---------|------------------------------------|
-| OrderID         | string  | Unique order identifier            |
-| UserID          | string  | ID of the user placing the order   |
-| TotalPrice      | number  | Total order price                  |
-| ShippingAddress | string  | Delivery address                   |
-| OrderStatus     | string  | Status: pending/shipped/delivered |
-| PaymentStatus   | string  | Status: paid/unpaid/failed         |
-
-### CartItem Entity
-
-| Field       | Type    | Description              |
-|-------------|---------|--------------------------|
-| CartItemID  | string  | Unique identifier        |
-| ProductID   | string  | Linked product ID        |
-| Quantity    | number  | Quantity of the product  |
-| TotalPrice  | number  | Total price for the item |
-
-## API Endpoints
-
-### Product
-- **GET /products** – List all products
-- **GET /products/{id}** – Get product by ID
-- **POST /products** – Create a new product
-- **PUT /products/{id}** – Update a product
-- **DELETE /products/{id}** – Delete a product
-- **GET /products/category/{category}** – Get products by category
-
-### CartItem
-- **GET /cart/{userId}** – Get cart items for a user
-- **POST /cart/{userId}** – Add item to cart
-- **PUT /cart/{userId}/{cartItemId}** – Update quantity
-- **DELETE /cart/{userId}/{cartItemId}** – Remove item from cart
-- **DELETE /cart/{userId}** – Clear cart
-
-### Order
-- **POST /orders** – Place a new order
-- **GET /orders/{userId}** – Get all orders for a user
-- **GET /orders/details/{orderId}** – Get order details
-- **PUT /orders/status/{orderId}** – Update order status
-- **PUT /orders/payment/{orderId}** – Update payment status
-
-### User
-- **POST /auth/register** – Register a new user
-- **POST /auth/login** – Login
-- **GET /users/{userId}** – Get user profile
-- **PUT /users/{userId}** – Update user profile
-
-### Admin
-- **GET /admin/products** – View/manage all products
-- **GET /admin/orders** – View all orders
-- **GET /admin/users** – View all users
-- **GET /admin/reports/sales** – Generate sales reports
-- **GET /admin/reports/analytics** – View analytics
-
-
-## Project Structure
-
-## Backend
+# E-Commerce Website
+## i. Moudule Overview
+The **Shopping Cart Module** is a key component of the E-Commerce application that provides functionality for managing a user's shopping cart. It allows users to:
  
+- Add products to their cart.
+- View the items in their cart.
+- Remove items from their cart.
+- Calculate the total price of items in their cart.
+ 
+This module interacts with the `Product` and `User` modules to fetch product details and associate cart items with users. It is built using **Spring Boot**, **Spring Data JPA**, and an **H2 in-memory database** for development and testing. The module also integrates with **Spring Cloud Netflix Eureka** for service discovery and **Springdoc OpenAPI** for API documentation.
+ 
+## ii. Architecture
+ 
+## 1. Component Diagram
+ 
+This diagram illustrates the high-level relationships and interactions between the main components of the application.
+ 
+```mermaid
+graph TD
+    subgraph "Presentation Layer"
+        CartController[CartController]
+    end
+ 
+    subgraph "Business Logic Layer"
+        CartService[CartService]
+    end
+ 
+    subgraph "Data Access Layer"
+        CartItemRepository[CartItemRepository]
+        ProductRepository[ProductRepository]
+        UserRepository[UserRepository]
+    end
+ 
+    subgraph "External Systems"
+        MySQL[(MySQL Database)]
+        Eureka[(Eureka Discovery Service)]
+    end
+ 
+    CartController --> CartService
+    CartService --> CartItemRepository
+    CartService --> ProductRepository
+    CartService --> UserRepository
+    CartItemRepository --> MySQL
+    ProductRepository --> MySQL
+    UserRepository --> MySQL
+ 
+    CartController -- Registers/Discovers --> Eureka
+
+ 
+    %% Optional: Styles for better visual separation (might not render in all GitHub viewers)
+    %% Some GitHub Markdown viewers might not support advanced styling directly within the code block.
+    %% If these styles don't render, the basic connections will still be clear.
+    style CartController fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style CartService fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style CartItemRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style ProductRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style UserRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style MySQL fill:#444,stroke:#eee,stroke-width:2px,color:#eee
+    style Eureka fill:#444,stroke:#eee,stroke-width:2px,color:#eee
 ```
-backend/                      # Spring Boot backend
+## 2. Flow Diagram
+ 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Cart Controller
+    participant Cart Service
+    participant Repository
+    participant Database
+    User->>Cart Controller: Adds item to cart
+    Cart Controller->>Cart Service: Initiates cart process
+    Cart Service->>Repository: Manages data operations
+    Repository->>Database: Interacts with stored data
+    Database-->>Repository: Data operation result
+    Repository-->>Cart Service: Data confirmed
+    Cart Service-->>Cart Controller: Process complete
+    Cart Controller-->>User: Cart update confirmation 
+```
+ 
+The Shopping Cart Module follows a **layered architecture** to ensure separation of concerns and maintainability:
+ 
+1. **Controller Layer**:
+   - Handles HTTP requests and responses.
+   - Contains REST endpoints for cart operations such as adding items, viewing the cart, and removing items.
+ 
+2. **Service Layer**:
+   - Contains the business logic for managing the shopping cart.
+   - Handles operations like adding products to the cart, calculating total prices, and interacting with repositories.
+ 
+3. **Repository Layer**:
+   - Interacts with the database using Spring Data JPA.
+   - Manages CRUD operations for entities like `CartItem`, `Product`, and `User`.
+ 
+4. **Model Layer**:
+   - Defines the entities (`CartItem`, `Product`, `User`) and their relationships.
+   - Represents the database tables and their mappings.
+ 
+ 
+## iii. Controller Endpoints and Their Functions
+ 
+### 1. **Add to Cart**
+- **Endpoint**: `/api/cart/add`
+- **Method**: `POST`
+- **Function**: Adds a product to the user's cart. If the product already exists in the cart, it updates the quantity and total price.
+ 
+### 2. **Remove from Cart**
+- **Endpoint**: `/api/cart/remove/{cartItemId}`
+- **Method**: `DELETE`
+- **Function**: Removes a specific item from the user's cart based on the cart item ID.
+ 
+### 3. **View Cart**
+- **Endpoint**: `/api/cart/view/{userId}`
+- **Method**: `GET`
+- **Function**: Retrieves all items in the cart for a specific user.
+ 
+### 4. **Get Total Price**
+- **Endpoint**: `/api/cart/total/{userId}`
+- **Method**: `GET`
+- **Function**: Calculates and returns the total price of all items in the user's cart.
+ 
+### 5. **Get All Products**
+- **Endpoint**: `/api/cart/products`
+- **Method**: `GET`
+- **Function**: Retrieves a list of all available products in the system.
+ 
+ 
+## iv. Tables
+### Product Table
+ 
+| Column Name   | Data Type | Description           |
+|---------------|-----------|-----------------------|
+| `product_id`  | BIGINT    | Primary key           |
+| `name`        | VARCHAR   | Name of the product   |
+| `price`       | DOUBLE    | Price of the product  |
+ 
+### App_User Table
+ 
+| Column Name   | Data Type | Description       |
+|---------------|-----------|-------------------|
+| `user_id`     | BIGINT    | Primary key       |
+| `name`        | VARCHAR   | Name of the user  |
+ 
+### Cart_Item Table
+ 
+| Column Name     | Data Type | Description                     |
+|------------------|-----------|---------------------------------|
+| `cart_item_id`   | BIGINT    | Primary key                     |
+| `product_id`     | BIGINT    | Foreign key referencing `product` |
+| `user_id`        | BIGINT    | Foreign key referencing `app_user` |
+| `quantity`       | INT       | Quantity of the product in cart |
+| `total_price`    | DOUBLE    | Total price for the cart item   |
+ 
+ 
+## v. File Structure
+```
+E_Commerce/                   # E-Commerce Spring Boot application
 ├── src/
 │   ├── main/
-│   │   ├── java/com/ecommerce/
-│   │   │   ├── EcommerceApplication.java
-│   │   │   ├── config/         # App & security configs
-│   │   │   ├── controller/     # API endpoints
-│   │   │   ├── model/          # JPA entities
-│   │   │   ├── repository/     # Data access
-│   │   │   ├── service/        # Business logic
-│   │   │   └── dto/            # Request/response objects
+│   │   ├── java/com/platform/ecommerce/
+│   │   │   ├── EcommerceApplication.java  # Main application class
+│   │   │   ├── config/                    # Configuration classes
+│   │   │   │   └── DataSeeder.java        # Seeds initial data
+│   │   │   ├── controller/               # API endpoints
+│   │   │   │   └── CartController.java    # Handles cart-related endpoints
+│   │   │   ├── model/                    # JPA entities
+│   │   │   │   ├── CartItem.java         # Cart item entity
+│   │   │   │   ├── Product.java          # Product entity
+│   │   │   │   └── User.java             # User entity
+│   │   │   ├── repository/               # Data access layer
+│   │   │   │   ├── CartItemRepository.java # Cart item repository
+│   │   │   │   ├── ProductRepository.java  # Product repository
+│   │   │   │   └── UserRepository.java     # User repository
+│   │   │   ├── service/                  # Business logic
+│   │   │   │   └── CartService.java      # Handles cart operations
 │   │   └── resources/
-│   │       └── application.properties
-├── test/                      # Unit tests
-└── pom.xml
+│   │       ├── application.properties    # Application configuration
+│   │       └── static/                   # Static resources (if any)
+├── test/                                 # Unit tests
+│   ├── java/com/platform/ecommerce/
+│   │   └── EcommerceApplicationTests.java # Unit tests for the application
+├── pom.xml                               # Maven configuration file
 ```
