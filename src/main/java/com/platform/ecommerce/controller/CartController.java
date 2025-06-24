@@ -7,7 +7,7 @@ import com.platform.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.platform.ecommerce.DTO.CartRequest;
 import java.util.List;
 
 @RestController
@@ -19,38 +19,6 @@ public class CartController {
 
     @Autowired
     private ProductRepository productRepository;
-
-    // DTO for add-to-cart request
-    public static class CartRequest {
-        public Long userId;
-        public Long productId;
-        public int quantity;
-
-        // Getters and setters (or use Lombok @Data if preferred)
-        public Long getUserId() {
-            return userId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
-        public Long getProductId() {
-            return productId;
-        }
-
-        public void setProductId(Long productId) {
-            this.productId = productId;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-    }
 
     @PostMapping("/add")
     public ResponseEntity<CartItem> addToCart(@RequestBody CartRequest request) {
