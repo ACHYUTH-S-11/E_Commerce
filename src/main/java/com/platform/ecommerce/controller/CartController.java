@@ -48,7 +48,6 @@ public class CartController {
         return ResponseEntity.ok(total);
     }
 
-
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productRepository.findAll();
