@@ -1,5 +1,24 @@
 # E-Commerce Website
-## i. Moudule Overview
+
+# Table of Contents
+
+1. [Module Overview](#1-module-overview)  
+2. [Deployment Steps](#2-deployment-steps)  
+3. [Component Diagram](#3-component-diagram)  
+4. [Flow Diagram](#4-flow-diagram) 
+5. [Controller Endpoints and Their Functions](#5-controller-endpoints-and-their-functions)  
+   5.1. [Add to Cart](#51-add-to-cart)  
+   5.2. [Remove from Cart](#52-remove-from-cart)  
+   5.3. [View Cart](#53-view-cart)  
+   5.4. [Get Total Price](#54-get-total-price)  
+   5.5. [Get All Products](#55-get-all-products)  
+6. [Tables](#6-tables)  
+   6.1. [Product Table](#61-product-table)  
+   6.2. [App_User Table](#62-app_user-table)  
+   6.3. [Cart_Item Table](#63-cart_item-table)  
+7. [File Structure](#7-file-structure)
+
+## 1 Module Overview
 The **Shopping Cart Module** is a key component of the E-Commerce application that provides functionality for managing a user's shopping cart. It allows users to:
  
 - Add products to their cart.
@@ -9,7 +28,7 @@ The **Shopping Cart Module** is a key component of the E-Commerce application th
  
 This module interacts with the `Product` and `User` modules to fetch product details and associate cart items with users. It is built using **Spring Boot**, **Spring Data JPA**, and an **H2 in-memory database** for development and testing. The module also integrates with **Spring Cloud Netflix Eureka** for service discovery and **Springdoc OpenAPI** for API documentation.
 
-## ii. Deployment Steps
+## 2 Deployment Steps
 
 1. **Clone the project**
    Run the following command to build the project:  
@@ -28,9 +47,7 @@ This module interacts with the `Product` and `User` modules to fetch product det
     mvn spring-boot:run
     ```
  
-## iii. Architecture
- 
-## 1. Component Diagram
+## 3 Component Diagram
  
 This diagram illustrates the high-level relationships and interactions between the main components of the application.
  
@@ -77,7 +94,7 @@ graph TD
     style MySQL fill:#444,stroke:#eee,stroke-width:2px,color:#eee
     style Eureka fill:#444,stroke:#eee,stroke-width:2px,color:#eee
 ```
-## 2. Flow Diagram
+## 4 Flow Diagram
  
 ```mermaid
 sequenceDiagram
@@ -115,36 +132,36 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
    - Represents the database tables and their mappings.
  
  
-## iv. Controller Endpoints and Their Functions
+## 5 Controller Endpoints and Their Functions
  
-### 1. **Add to Cart**
+### 5.1 **Add to Cart**
 - **Endpoint**: `/api/cart/add`
 - **Method**: `POST`
 - **Function**: Adds a product to the user's cart. If the product already exists in the cart, it updates the quantity and total price.
  
-### 2. **Remove from Cart**
+### 5.2 **Remove from Cart**
 - **Endpoint**: `/api/cart/remove/{cartItemId}`
 - **Method**: `DELETE`
 - **Function**: Removes a specific item from the user's cart based on the cart item ID.
  
-### 3. **View Cart**
+### 5.3 **View Cart**
 - **Endpoint**: `/api/cart/view/{userId}`
 - **Method**: `GET`
 - **Function**: Retrieves all items in the cart for a specific user.
  
-### 4. **Get Total Price**
+### 5.4 **Get Total Price**
 - **Endpoint**: `/api/cart/total/{userId}`
 - **Method**: `GET`
 - **Function**: Calculates and returns the total price of all items in the user's cart.
  
-### 5. **Get All Products**
+### 5.5 **Get All Products**
 - **Endpoint**: `/api/cart/products`
 - **Method**: `GET`
 - **Function**: Retrieves a list of all available products in the system.
  
  
-## v. Tables
-### Product Table
+## 6 Tables
+### 6.1 Product Table
  
 | Column Name   | Data Type | Description           |
 |---------------|-----------|-----------------------|
@@ -152,14 +169,14 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
 | `name`        | VARCHAR   | Name of the product   |
 | `price`       | DOUBLE    | Price of the product  |
  
-### App_User Table
+### 6.2 App_User Table
  
 | Column Name   | Data Type | Description       |
 |---------------|-----------|-------------------|
 | `user_id`     | BIGINT    | Primary key       |
 | `name`        | VARCHAR   | Name of the user  |
  
-### Cart_Item Table
+### 6.3 Cart_Item Table
  
 | Column Name     | Data Type | Description                     |
 |------------------|-----------|---------------------------------|
@@ -170,7 +187,7 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
 | `total_price`    | DOUBLE    | Total price for the cart item   |
  
  
-## vi. File Structure
+## 7 File Structure
 ```
 E_Commerce/                   # E-Commerce Spring Boot application
 ├── src/
