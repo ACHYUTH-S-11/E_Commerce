@@ -10,14 +10,19 @@ The **Shopping Cart Module** is a key component of the E-Commerce application th
 This module interacts with the `Product` and `User` modules to fetch product details and associate cart items with users. It is built using **Spring Boot**, **Spring Data JPA**, and an **H2 in-memory database** for development and testing. The module also integrates with **Spring Cloud Netflix Eureka** for service discovery and **Springdoc OpenAPI** for API documentation.
 
 ## ii. Deployment Steps
- 
-1. **Build the Project**  
+
+1. **Clone the project**
+   Run the following command to build the project:  
+    ```bash
+    git clone https://github.com/ACHYUTH-S-11/E_Commerce.git
+    ```
+3. **Build the Project**  
     Run the following command to build the project:  
     ```bash
     mvn clean install
     ```
  
-2. **Run the Application Locally**  
+4. **Run the Application Locally**  
     Execute the following command to start the service locally:  
     ```bash
     mvn spring-boot:run
