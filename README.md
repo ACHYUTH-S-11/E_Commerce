@@ -8,8 +8,22 @@ The **Shopping Cart Module** is a key component of the E-Commerce application th
 - Calculate the total price of items in their cart.
  
 This module interacts with the `Product` and `User` modules to fetch product details and associate cart items with users. It is built using **Spring Boot**, **Spring Data JPA**, and an **H2 in-memory database** for development and testing. The module also integrates with **Spring Cloud Netflix Eureka** for service discovery and **Springdoc OpenAPI** for API documentation.
+
+## ii. Deployment Steps
  
-## ii. Architecture
+1. **Build the Project**  
+    Run the following command to build the project:  
+    ```bash
+    mvn clean install
+    ```
+ 
+2. **Run the Application Locally**  
+    Execute the following command to start the service locally:  
+    ```bash
+    mvn spring-boot:run
+    ```
+ 
+## iii. Architecture
  
 ## 1. Component Diagram
  
@@ -96,7 +110,7 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
    - Represents the database tables and their mappings.
  
  
-## iii. Controller Endpoints and Their Functions
+## iv. Controller Endpoints and Their Functions
  
 ### 1. **Add to Cart**
 - **Endpoint**: `/api/cart/add`
@@ -124,7 +138,7 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
 - **Function**: Retrieves a list of all available products in the system.
  
  
-## iv. Tables
+## v. Tables
 ### Product Table
  
 | Column Name   | Data Type | Description           |
@@ -151,7 +165,7 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
 | `total_price`    | DOUBLE    | Total price for the cart item   |
  
  
-## v. File Structure
+## vi. File Structure
 ```
 E_Commerce/                   # E-Commerce Spring Boot application
 ├── src/
