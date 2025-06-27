@@ -1,4 +1,4 @@
-# E-Commerce Website
+# Shopping Cart Module
 
 # Table of Contents
 
