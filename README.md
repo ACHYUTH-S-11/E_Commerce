@@ -58,46 +58,36 @@ This diagram illustrates the high-level relationships and interactions between t
  
 ```mermaid
 graph TD
-    subgraph "Presentation Layer"
-        CartController[CartController]
-    end
- 
-    subgraph "Business Logic Layer"
-        CartService[CartService]
-    end
- 
-    subgraph "Data Access"
-        CartItem[CartItem]
-        Product[Product]
-        User[User]
-    end
- 
+    
+        subgraph "Presentation Layer"
+            CartController[CartController]
+        end
+
+        subgraph "Business Logic Layer"
+            CartService[CartService]
+        end
+
+        subgraph "Data Access Layer"
+            CartRepository[CartRepository]
+            ProductClient[ProductClient Feign]
+        end
+    
+
     subgraph "External Systems"
         MySQL[(MySQL Database)]
+        ProductService[Product Service]
+        AuthenticationSystem[Authentication System]
         Eureka[(Eureka Discovery Service)]
     end
- 
-    CartController --> CartService
-    CartService --> CartItem
-    CartService --> Product
-    CartService --> User
-    CartItem --> MySQL
-    Product --> MySQL
-    User --> MySQL
- 
-    CartController -- Registers/Discovers --> Eureka
 
- 
-    %% Optional: Styles for better visual separation (might not render in all GitHub viewers)
-    %% Some GitHub Markdown viewers might not support advanced styling directly within the code block.
-    %% If these styles don't render, the basic connections will still be clear.
-    style CartController fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style CartService fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style CartItem fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style Product fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style User fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style MySQL fill:#444,stroke:#eee,stroke-width:2px,color:#eee
-    style Eureka fill:#444,stroke:#eee,stroke-width:2px,color:#eee
+    CartController --> CartService
+    CartService --> CartRepository
+    CartService --> ProductClient
+    CartRepository --> MySQL
+    ProductClient --> ProductService
+    CartController -- (Authenticates via JWT) --> AuthenticationSystem
+    CartService -- Registers/Discovers --> Eureka
+
 ```
 ## 4. Flow Diagram
  
