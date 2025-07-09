@@ -66,10 +66,10 @@ graph TD
         CartService[CartService]
     end
  
-    subgraph "Data Access Layer"
-        CartItemRepository[CartItemRepository]
-        ProductRepository[ProductRepository]
-        UserRepository[UserRepository]
+    subgraph "Data Access"
+        CartItem[CartItem]
+        Product[Product]
+        User[User]
     end
  
     subgraph "External Systems"
@@ -78,12 +78,12 @@ graph TD
     end
  
     CartController --> CartService
-    CartService --> CartItemRepository
-    CartService --> ProductRepository
-    CartService --> UserRepository
-    CartItemRepository --> MySQL
-    ProductRepository --> MySQL
-    UserRepository --> MySQL
+    CartService --> CartItem
+    CartService --> Product
+    CartService --> User
+    CartItem --> MySQL
+    Product --> MySQL
+    User --> MySQL
  
     CartController -- Registers/Discovers --> Eureka
 
@@ -93,9 +93,9 @@ graph TD
     %% If these styles don't render, the basic connections will still be clear.
     style CartController fill:#333,stroke:#eee,stroke-width:2px,color:#eee
     style CartService fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style CartItemRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style ProductRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
-    style UserRepository fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style CartItem fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style Product fill:#333,stroke:#eee,stroke-width:2px,color:#eee
+    style User fill:#333,stroke:#eee,stroke-width:2px,color:#eee
     style MySQL fill:#444,stroke:#eee,stroke-width:2px,color:#eee
     style Eureka fill:#444,stroke:#eee,stroke-width:2px,color:#eee
 ```
