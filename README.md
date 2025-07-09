@@ -10,13 +10,18 @@
    5.1. [Add to Cart](#51-add-to-cart)  
    5.2. [Remove from Cart](#52-remove-from-cart)  
    5.3. [View Cart](#53-view-cart)  
-   5.4. [Get Total Price](#54-get-total-price)  
-   5.5. [Get All Products](#55-get-all-products)  
+   5.4. [Get Cart Summary](#54-get-cart-summary)  
+   5.5. [Clear Cart](#55-clear-cart)  
+   5.6. [Update Cart Item Quantity](#56-update-cart-item-quantity)  
+   5.7. [Remove Cart Items by Product](#57-remove-cart-items-by-product)
+   
 6. [Tables](#6-tables)  
-   6.1. [Product Table](#61-product-table)  
-   6.2. [App User Table](#62-app_user-table)  
-   6.3. [Cart Item Table](#63-cart_item-table)  
-7. [File Structure](#7-file-structure)
+   6.1. [Cart Item Table](#61-cart-item-table)  
+   6.2. [Users Table](#62-users-table)  
+   6.3. [User roles Table](#63-user-roles-table)  
+   6.4. [Product Table](#64-product-table)  
+   
+8. [File Structure](#7-file-structure)
 
 ## 1. Module Overview
 The **Shopping Cart Module** is a key component of the E-Commerce application that provides functionality for managing a user's shopping cart. It allows users to:
@@ -125,94 +130,123 @@ The Shopping Cart Module follows a **layered architecture** to ensure separation
  
 3. **Repository Layer**:
    - Interacts with the database using Spring Data JPA.
-   - Manages CRUD operations for entities like `CartItem`, `Product`, and `User`.
+   - Manages CRUD operations for entities like `Cart_item` `Product`, and `Users`.
  
 4. **Model Layer**:
-   - Defines the entities (`CartItem`, `Product`, `User`) and their relationships.
+   - Defines the entities (`Cart_item`, `Product`, `Users`) and their relationships.
    - Represents the database tables and their mappings.
  
  
 ## 5. Controller Endpoints and Their Functions
- 
+ 
 ### 5.1 **Add to Cart**
 - **Endpoint**: `/api/cart/add`
 - **Method**: `POST`
 - **Function**: Adds a product to the user's cart. If the product already exists in the cart, it updates the quantity and total price.
- 
+ 
 ### 5.2 **Remove from Cart**
 - **Endpoint**: `/api/cart/remove/{cartItemId}`
 - **Method**: `DELETE`
 - **Function**: Removes a specific item from the user's cart based on the cart item ID.
- 
+ 
 ### 5.3 **View Cart**
-- **Endpoint**: `/api/cart/view/{userId}`
+- **Endpoint**: `/api/cart/user`
 - **Method**: `GET`
-- **Function**: Retrieves all items in the cart for a specific user.
- 
-### 5.4 **Get Total Price**
-- **Endpoint**: `/api/cart/total/{userId}`
+- **Function**: Retrieves all items in the cart for the authenticated user based on the token.
+ 
+### 5.4 **Get Cart Summary**
+- **Endpoint**: `/api/cart/summary`
 - **Method**: `GET`
-- **Function**: Calculates and returns the total price of all items in the user's cart.
- 
-### 5.5 **Get All Products**
-- **Endpoint**: `/api/cart/products`
-- **Method**: `GET`
-- **Function**: Retrieves a list of all available products in the system.
- 
- 
+- **Function**: Calculates and returns the total price, total items, and unique products in the user's cart.
+ 
+### 5.5 **Clear Cart**
+- **Endpoint**: `/api/cart/clear`
+- **Method**: `DELETE`
+- **Function**: Clears all items in the authenticated user's cart.
+ 
+### 5.6 **Update Cart Item Quantity**
+- **Endpoint**: `/api/cart/update/{cartItemId}`
+- **Method**: `PUT`
+- **Function**: Updates the quantity of a specific cart item.
+ 
+### 5.7 **Remove Cart Items by Product**
+- **Endpoint**: `/api/cart/remove-by-product/{productId}`
+- **Method**: `DELETE`
+- **Function**: Removes all cart items associated with a specific product ID.
+
 ## 6. Tables
-### 6.1 Product Table
  
-| Column Name   | Data Type | Description           |
-|---------------|-----------|-----------------------|
-| `product_id`  | BIGINT    | Primary key           |
-| `name`        | VARCHAR   | Name of the product   |
-| `price`       | DOUBLE    | Price of the product  |
+### 6.1 Cart Item Table
  
-### 6.2 App_User Table
+| Column Name | Data Type | Description |
+|---|---|---|
+| `cart_itemid` | BIGINT | Primary key for the cart item. |
+| `user_id` | BIGINT | Foreign key referencing the user who owns this cart item. |
+| `product_id` | BIGINT | Foreign key referencing the product added to the cart. |
+| `quantity` | INT | The number of units of the product in this cart item. |
+| `total_price` | DOUBLE | The calculated total price for this specific cart item (quantity * product price). |
+
+### 6.2 Users Table
  
-| Column Name   | Data Type | Description       |
-|---------------|-----------|-------------------|
-| `user_id`     | BIGINT    | Primary key       |
-| `name`        | VARCHAR   | Name of the user  |
- 
-### 6.3 Cart_Item Table
- 
-| Column Name     | Data Type | Description                     |
-|------------------|-----------|---------------------------------|
-| `cart_item_id`   | BIGINT    | Primary key                     |
-| `product_id`     | BIGINT    | Foreign key referencing `product` |
-| `user_id`        | BIGINT    | Foreign key referencing `app_user` |
-| `quantity`       | INT       | Quantity of the product in cart |
-| `total_price`    | DOUBLE    | Total price for the cart item   |
- 
+| Column Name | Data Type | Description |
+|---|---|---|
+| `user_id` | BIGINT | Primary key for the user. |
+| `username` | VARCHAR | Unique username for the user. |
+| `password` | VARCHAR | User's password (should be hashed in a real application). |
+| `email` | VARCHAR | Unique email address for the user. |
+| `first_name` | VARCHAR | User's first name. |
+| `last_name` | VARCHAR | User's last name. |
+
+### 6.3 User Roles Table
+
+| Column Name | Data Type | Description |
+|---|---|---|
+| `user_user_id` | BIGINT | Unique identifier for the user. |
+| `roles` | VARCHAR | User's role, can be "ROLE_ADMIN" or "ROLE_USER". |
+
+### 6.4 Product Table
+| Column Name | Data Type | Description |
+|---|---|---|
+| `product_id` | BIGINT | Primary key |
+| `category` | VARCHAR | Category of the product |
+| `description` | VARCHAR | Detailed description of the product |
+| `image_url` | VARCHAR | URL of the product image |
+| `name` | VARCHAR | Name of the product |
+| `price` | DOUBLE | Price of the product |
+| `stock_quantity` | INT | Number of units available in stock |
+
+
  
 ## 7. File Structure
 ```
-E_Commerce/                   # E-Commerce Spring Boot application
+cart-service/                   # Shopping Cart Spring Boot application
 ├── src/
 │   ├── main/
-│   │   ├── java/com/platform/ecommerce/
-│   │   │   ├── EcommerceApplication.java  # Main application class
-│   │   │   ├── config/                    # Configuration classes
-│   │   │   │   └── DataSeeder.java        # Seeds initial data
-│   │   │   ├── controller/               # API endpoints
-│   │   │   │   └── CartController.java    # Handles cart-related endpoints
-│   │   │   ├── model/                    # JPA entities
-│   │   │   │   ├── CartItem.java         # Cart item entity
-│   │   │   │   ├── Product.java          # Product entity
-│   │   │   │   └── User.java             # User entity
-│   │   │   ├── repository/               # Data access layer
-│   │   │   │   ├── CartItemRepository.java # Cart item repository
-│   │   │   │   ├── ProductRepository.java  # Product repository
-│   │   │   │   └── UserRepository.java     # User repository
-│   │   │   ├── service/                  # Business logic
-│   │   │   │   └── CartService.java      # Handles cart operations
+│   │   ├── java/com/platform/
+│   │   │   ├── CartServiceApplication.java  # Main application class
+│   │   │   ├── config/                      # Configuration classes
+│   │   │   │   └── SecurityConfig.java      # Security configuration
+│   │   │   ├── controller/                  # API endpoints
+│   │   │   │   └── CartController.java      # Handles cart-related endpoints
+│   │   │   ├── entity/                      # JPA entities
+│   │   │   │   └── CartItem.java            # Cart item entity
+│   │   │   ├── feign/                       # Feign clients for external services
+│   │   │   │   └── ProductClient.java       # Feign client for product service
+│   │   │   ├── model/                       # DTOs and models
+│   │   │   │   ├── CartItemDTO.java         # Cart item DTO
+│   │   │   │   ├── CartItemRequest.java     # Request model for cart item
+│   │   │   │   ├── CartSummary.java         # Summary model for cart
+│   │   │   │   └── ProductDTO.java          # Product DTO
+│   │   │   ├── repository/                  # Data access layer
+│   │   │   │   └── CartRepository.java      # Cart item repository
+│   │   │   ├── service/                     # Business logic
+│   │   │   │   └── CartService.java         # Handles cart operations
 │   │   └── resources/
-│   │       ├── application.properties    # Application configuration
-│   │       └── static/                   # Static resources (if any)
-├── test/                                 # Unit tests
-│   ├── java/com/platform/ecommerce/
-│   │   └── EcommerceApplicationTests.java # Unit tests for the application
-├── pom.xml                               # Maven configuration file
+│   │       ├── application.properties       # Application configuration
+│   │       └── static/                      # Static resources (if any)
+├── test/                                   # Unit tests
+│   ├── java/com/platform/
+│   │   └── CartServiceApplicationTests.java # Unit tests for the application
+├── pom.xml                                 # Maven configuration file
+
 ```
