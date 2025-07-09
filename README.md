@@ -58,22 +58,13 @@ This diagram illustrates the high-level relationships and interactions between t
  
 ```mermaid
 graph TD
-    
-        subgraph "Presentation Layer"
-            CartController[CartController]
-        end
 
-        subgraph "Business Logic Layer"
-            CartService[CartService]
-        end
+  CartController[CartController]
+  CartService[CartService]
+  CartRepository[CartRepository]
+  ProductClient[ProductClient Feign]
 
-        subgraph "Data Access Layer"
-            CartRepository[CartRepository]
-            ProductClient[ProductClient Feign]
-        end
-    
-
-    subgraph "External Systems"
+   subgraph "External Systems"
         MySQL[(MySQL Database)]
         ProductService[Product Service]
         AuthenticationSystem[Authentication System]
